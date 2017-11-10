@@ -61,3 +61,12 @@ gulp.task('html:build', function () {
   })
   .pipe(reload({stream: true}));
 });
+
+gulp.task('js:build', function () {
+  gulp.src(path.src.js)
+  .pipe(rigger())
+  .pipe(uglify())
+  .pipe(suffix({suffix: '.min'}))
+  .pipe(gulp.dest(path.build.js))
+  .pipe(reload({stream: true}));
+});
