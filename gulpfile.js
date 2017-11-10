@@ -16,3 +16,34 @@ var removeHtmlComments = require('gulp-remove-html-comments');
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 var gulpsync = require('gulp-sync')(gulp);
+
+var path = {
+  build: {
+  html: 'build/',
+  js: 'build/js/',
+  css: 'build/css/'
+},
+src: {
+  html: 'src/*.html',
+  js: 'src/js/registration.js',
+  jquery: 'src/js/jquery-3.2.1.min.js',
+  style: 'src/css/registration.css',
+  bootstrap: 'src/css/bootstrap.min.css'
+},
+watch: {
+  html: 'src/**/*.html',
+  js: 'src/js/**/*.js',
+  style: 'src/css/**/*.css'
+},
+  clean: './build'
+};
+
+var config = {
+  server: {
+    baseDir: "./build"
+  },
+  tunnel: true,
+  host: 'localhost',
+  port: 8080,
+  logPrefix: "slanderc"
+};
