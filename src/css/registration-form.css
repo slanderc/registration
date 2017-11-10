@@ -4,6 +4,12 @@ body {
   overflow: hidden;   
 }
 
+.content {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 80px;
+}
+
 .registration-form__button {
   border-radius: 0px;
   border-style: solid;

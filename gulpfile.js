@@ -25,9 +25,9 @@ var path = {
 },
 src: {
   html: 'src/*.html',
-  js: 'src/js/registration.js',
+  js: 'src/js/registration-form.js',
   jquery: 'src/js/jquery-3.2.1.min.js',
-  style: 'src/css/registration.css',
+  style: 'src/css/registration-form.css',
   bootstrap: 'src/css/bootstrap.min.css'
 },
 watch: {
@@ -71,7 +71,6 @@ gulp.task('js:build', function () {
   .pipe(reload({stream: true}));
 });
 
-
 gulp.task('style:build', function () {
   gulp.src(path.src.style)
   .pipe(sass())
@@ -92,6 +91,14 @@ gulp.task('move:bootstrap', function(){
   .pipe(gulp.dest(path.build.css))
 });
 
+gulp.task('build', gulpsync.sync([
+  'js:build',
+  'move:jquery',
+  'style:build',
+  'move:bootstrap',
+  'html:build'
+]));
+
 gulp.task('watch', function(){
   watch([path.watch.html], function(event, cb) {
     gulp.start('html:build');
@@ -102,14 +109,16 @@ gulp.task('watch', function(){
   watch([path.watch.js], function(event, cb) {
     gulp.start('js:build');
   });
-  watch([path.watch.img], function(event, cb) {
-    gulp.start('image:build');
-  });
-  watch([path.watch.fonts], function(event, cb) {
-    gulp.start('fonts:build');
-  });
 });
 
 gulp.task('webserver', function () {
   browserSync(config);
 });
+
+gulp.task('clean', function (cb) {
+  rimraf(path.clean, cb);
+});
+
+gulp.task('dev', ['build', 'webserver', 'watch']);
+
+gulp.task('default', ['dev']);
